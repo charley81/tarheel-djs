@@ -8,3 +8,14 @@ export const navlinks = [
     label: "All DJ's"
   }
 ]
+
+export const footerRoutes = [
+  {
+    path: '/terms-conditions',
+    name: 'Terms & Conditions'
+  },
+  {
+    path: '/privacy-policy',
+    name: 'Privacy Policy'
+  }
+]
