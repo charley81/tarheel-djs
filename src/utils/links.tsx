@@ -11,11 +11,11 @@ export const navlinks = [
 
 export const footerRoutes = [
   {
-    path: '/terms-conditions',
-    name: 'Terms & Conditions'
+    href: '/terms-conditions',
+    label: 'Terms & Conditions'
   },
   {
-    path: '/privacy-policy',
-    name: 'Privacy Policy'
+    href: '/privacy-policy',
+    label: 'Privacy Policy'
   }
 ]
