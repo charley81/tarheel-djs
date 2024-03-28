@@ -9,8 +9,8 @@ export default function Footer() {
       </small>
       <ul className="flex gap-x-4 text-sm">
         {footerRoutes.map((route) => (
-          <li key={route.path} className="hover:text-sky-300">
-            <Link href={route.path}>{route.name}</Link>
+          <li key={route.href} className="hover:text-sky-300">
+            <Link href={route.href}>{route.label}</Link>
           </li>
         ))}
       </ul>
