@@ -8,6 +8,10 @@ export type ChildrenProps = {
   children: React.ReactNode
 }
 
+export type TitleComponentProps = ChildrenProps & {
+  className?: string
+}
+
 export type DjEvent = {
   id: number
   name: string

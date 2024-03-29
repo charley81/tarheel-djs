@@ -13,7 +13,7 @@ export default async function DjByCity({ params }: DjByCityProps) {
 
   return (
     <main className="flex flex-col items-center pt-36 p-4 min-h-[110vh]">
-      <TitleComponent>
+      <TitleComponent className="mb-24">
         {city === 'all' && "All DJ's"}
         {city !== 'all' &&
           `DJ's in ${city.charAt(0).toUpperCase() + city.slice(1)}`}

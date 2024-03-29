@@ -6,6 +6,7 @@ import { navlinks } from '@/utils/links'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import { cn } from '@/utils/helpers'
 
 export default function Header() {
   const activePath = usePathname()
@@ -19,7 +20,7 @@ export default function Header() {
           {navlinks.map((link) => (
             <li
               key={link.href}
-              className={clsx(
+              className={cn(
                 'hover:text-accent transition flex items-center relative',
                 {
                   'text-slate-50': activePath === link.href,

@@ -4,7 +4,7 @@ import DjCard from './dj-card'
 
 export default function DjList({ djs }: DjListProps) {
   return (
-    <section className="max-w-[1100px] flex flex-wrap gap-8 justify-center">
+    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       {djs.map((dj) => (
         <DjCard key={dj.id} dj={dj} />
       ))}
