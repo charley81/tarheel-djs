@@ -1,16 +1,15 @@
 import Link from 'next/link'
 import SearchForm from '@/components/search-form'
 import TitleComponent from '@/components/title-component'
-import MainSection from '@/components/main-section'
 
 export default function Home() {
   return (
-    <MainSection>
+    <main className="flex flex-col items-center pt-36 p-4">
       <TitleComponent>
-        Find
+        Find{' '}
         <span className="text-accent font-bold italic underline">
           DJ&apos;s
-        </span>
+        </span>{' '}
         in NC
       </TitleComponent>
 
@@ -23,10 +22,10 @@ export default function Home() {
       <section className="mt-4 flex gap-x-4 text-sm text-slate-400">
         <p>Popular:</p>
         <div className="space-x-2 font-semibold">
-          <Link href="/dj-by-city/charlotte">Charlotte</Link>
-          <Link href="/dj-by-city/charlotte">Raleigh</Link>
+          <Link href="/dj-by-city/austin">Austin</Link>
+          <Link href="/dj-by-city/seattle">Seattle</Link>
         </div>
       </section>
-    </MainSection>
+    </main>
   )
 }
