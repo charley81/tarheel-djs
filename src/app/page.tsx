@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import SearchForm from '@/components/search-form'
 
 export default function Home() {
   return (
@@ -11,17 +12,10 @@ export default function Home() {
         in NC
       </h1>
       <p className="mb-12 mt-4 text-lg text-slate-400 md:text-1xl lg:text-2xl">
-        dnb, house, techno, and more``
+        dnb, house, techno, and more
       </p>
 
-      <form className="w-full sm:w-[580px]">
-        <input
-          className="w-full h-16 rounded-md bg-slate-50/[8%] px-6 outline-none ring-accent transition focus:ring-2"
-          type="text"
-          placeholder="Search DJ's in any city"
-          spellCheck={false}
-        />
-      </form>
+      <SearchForm />
 
       <section className="mt-4 flex gap-x-4 text-sm text-slate-400">
         <p>Popular:</p>
