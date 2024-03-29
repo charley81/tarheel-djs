@@ -12,7 +12,7 @@ export default function Home() {
         in NC
       </h1>
       <p className="mb-12 mt-4 text-lg text-slate-400 md:text-1xl lg:text-2xl">
-        dnb, house, techno, and more``
+        dnb, house, techno, and more
       </p>
 
       <SearchForm />
