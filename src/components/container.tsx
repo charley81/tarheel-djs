@@ -1,4 +1,4 @@
-import { ChildrenProps } from '@/utils/types'
+import { ChildrenProps } from '@/lib/types'
 
 export default function Container({ children }: ChildrenProps) {
   return (

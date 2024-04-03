@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
-import { TitleComponentProps } from '@/utils/types'
-import { cn } from '@/utils/helpers'
+import { TitleComponentProps } from '@/lib/types'
+import { cn } from '@/lib/helpers'
 
 export default function TitleComponent({
   children,
