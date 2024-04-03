@@ -25,9 +25,19 @@ export type DjEvent = {
 }
 
 export type DjListProps = {
-  djs: DjEvent[]
+  city: string
 }
 
 export type DjCardProps = {
   dj: DjEvent
+}
+
+export type SkeletonProps = {
+  className?: string
+}
+
+export type DjPageProps = {
+  params: {
+    slug: string
+  }
 }

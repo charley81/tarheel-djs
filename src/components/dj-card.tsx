@@ -1,11 +1,36 @@
-import { DjCardProps } from '@/utils/types'
+'use client'
+
+import { DjCardProps } from '@/lib/types'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useRef } from 'react'
+
+const MotionLink = motion(Link)
 
 export default function DjCard({ dj }: DjCardProps) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['0 1', '1.5 1']
+  })
+  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1])
+  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.3, 1])
+
   return (
-    <Link href={`dj-by-city/${dj.slug}`}>
-      <section className="flex flex-col  bg-slate-50/[4%] rounded-xl overflow-hidden hover:scale-105 cursor-pointer active:scale-[1.02] transition">
+    <MotionLink
+      href={`/dj/${dj.slug}`}
+      ref={ref}
+      style={{
+        // @ts-ignore
+        scale: scaleProgress,
+        // @ts-ignore
+        opacity: opacityProgress
+      }}
+      initial={{ scale: 0.8, opacity: 0 }}
+    >
+      <section className="flex flex-col  bg-slate-50/[4%] rounded-xl overflow-hidden cursor-pointer state-effects">
         <Image
           src={dj.imageUrl}
           alt={dj.name}
@@ -19,6 +44,6 @@ export default function DjCard({ dj }: DjCardProps) {
           <p className="text-sm mt-4 text-slate-400">{dj.location}</p>
         </div>
       </section>
-    </Link>
+    </MotionLink>
   )
 }

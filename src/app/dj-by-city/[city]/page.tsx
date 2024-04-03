@@ -1,25 +1,34 @@
+import { Suspense } from 'react'
 import TitleComponent from '@/components/title-component'
-import { DjByCityProps } from '@/utils/types'
-import { DjEvent } from '@/utils/types'
+import { DjByCityProps } from '@/lib/types'
 import DjList from '@/components/dj-list'
+import Loading from './loading'
+import { capitalize } from '@/lib/helpers'
+import { Metadata } from 'next'
+
+export function generateMetadata({ params }: DjByCityProps): Metadata {
+  const city = params.city
+  return {
+    title: city === 'all' ? "All DJ's" : `DJ's in ${city}`,
+    description: `Find the best DJ's ${
+      city === 'all' ? 'anywhere' : `in ${capitalize(city)}`
+    }`
+  }
+}
 
 export default async function DjByCity({ params }: DjByCityProps) {
   const city = params.city
-
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=austin`
-  )
-  const data: DjEvent[] = await res.json()
 
   return (
     <main className="flex flex-col items-center pt-36 p-4 min-h-[110vh]">
       <TitleComponent className="mb-24">
         {city === 'all' && "All DJ's"}
-        {city !== 'all' &&
-          `DJ's in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
+        {city !== 'all' && `DJ's in ${capitalize(city)}`}
       </TitleComponent>
 
-      <DjList djs={data} />
+      <Suspense fallback={<Loading />}>
+        <DjList city={city} />
+      </Suspense>
     </main>
   )
 }

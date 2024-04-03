@@ -1,4 +1,4 @@
-import { footerRoutes } from '@/utils/links'
+import { footerRoutes } from '@/lib/links'
 import Link from 'next/link'
 
 export default function Footer() {

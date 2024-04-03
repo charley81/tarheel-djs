@@ -2,11 +2,11 @@
 
 import Logo from './logo'
 import Link from 'next/link'
-import { navlinks } from '@/utils/links'
+import { navlinks } from '@/lib/links'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
-import { cn } from '@/utils/helpers'
+import { cn } from '@/lib/helpers'
 
 export default function Header() {
   const activePath = usePathname()
