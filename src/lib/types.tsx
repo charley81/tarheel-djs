@@ -1,3 +1,5 @@
+import { Dj } from '@prisma/client'
+
 export type DjByCityProps = {
   params: {
     city: string
@@ -12,24 +14,12 @@ export type TitleComponentProps = ChildrenProps & {
   className?: string
 }
 
-export type DjEvent = {
-  id: number
-  name: string
-  slug: string
-  city: string
-  location: string
-  date: Date
-  organizerName: string
-  imageUrl: string
-  description: string
-}
-
 export type DjListProps = {
   city: string
 }
 
 export type DjCardProps = {
-  dj: DjEvent
+  dj: Dj
 }
 
 export type SkeletonProps = {
