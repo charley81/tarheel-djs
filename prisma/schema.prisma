@@ -15,6 +15,7 @@ model Dj {
   name      String
   slug      String   @unique
   city      String
+  genre     String
   musicLink String
   bio       String
   imageUrl  String
