@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { DjEvent } from '@/lib/types'
 import { DjPageProps } from '@/lib/types'
 import { Metadata } from 'next'
 import { getDj } from '@/lib/helpers'
