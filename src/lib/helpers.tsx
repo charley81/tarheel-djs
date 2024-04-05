@@ -1,8 +1,7 @@
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Dj, PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from './db'
+import { notFound } from 'next/navigation'
 
 export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
@@ -17,7 +16,11 @@ export function capitalize(string: string) {
 }
 
 export async function getDjs(city: string) {
-  const data = await prisma.dj.findMany({})
+  const data = await prisma.dj.findMany({
+    where: {
+      city: city === 'all' ? undefined : capitalize(city)
+    }
+  })
   return data
 }
 
@@ -27,5 +30,9 @@ export async function getDj(slug: string) {
       slug
     }
   })
+
+  if (!dj) {
+    return notFound()
+  }
   return dj
 }

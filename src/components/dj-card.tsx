@@ -38,9 +38,9 @@ export default function DjCard({ dj }: DjCardProps) {
           width={500}
           className="h-[60%] object-fit"
         />
-        <div className="flex flex-col justify-center items-center flex-1">
+        <div className="flex flex-col justify-center flex-1 p-4 ">
           <h2 className="text-2xl font-semibold">{dj.name}</h2>
-          <p className="italic text-slate-400">By {dj.genre}</p>
+          <p className="italic text-slate-400">{dj.genre}</p>
           <p className="text-sm mt-4 text-slate-400">{dj.city}</p>
         </div>
       </section>
