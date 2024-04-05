@@ -40,8 +40,8 @@ export default function DjCard({ dj }: DjCardProps) {
         />
         <div className="flex flex-col justify-center items-center flex-1">
           <h2 className="text-2xl font-semibold">{dj.name}</h2>
-          <p className="italic text-slate-400">By {dj.organizerName}</p>
-          <p className="text-sm mt-4 text-slate-400">{dj.location}</p>
+          <p className="italic text-slate-400">By {dj.genre}</p>
+          <p className="text-sm mt-4 text-slate-400">{dj.city}</p>
         </div>
       </section>
     </MotionLink>

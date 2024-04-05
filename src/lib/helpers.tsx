@@ -1,6 +1,8 @@
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Dj } from '@prisma/client'
+import { Dj, PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
@@ -15,22 +17,15 @@ export function capitalize(string: string) {
 }
 
 export async function getDjs(city: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`,
-    {
-      next: {
-        revalidate: 300
-      }
-    }
-  )
-  const data: Dj[] = await res.json()
+  const data = await prisma.dj.findMany({})
   return data
 }
 
 export async function getDj(slug: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-  )
-  const data: Dj[] = await res.json()
-  return data
+  const dj = await prisma.dj.findUnique({
+    where: {
+      slug
+    }
+  })
+  return dj
 }
