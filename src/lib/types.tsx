@@ -1,9 +1,13 @@
 import { Dj } from '@prisma/client'
 
-export type DjByCityProps = {
+export type DjProps = {
   params: {
     city: string
   }
+}
+
+export type DjByCityProps = DjProps & {
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export type ChildrenProps = {
@@ -16,6 +20,7 @@ export type TitleComponentProps = ChildrenProps & {
 
 export type DjListProps = {
   city: string
+  page: number
 }
 
 export type DjCardProps = {
@@ -30,4 +35,9 @@ export type DjPageProps = {
   params: {
     slug: string
   }
+}
+
+export type PaginationControlsProps = {
+  previousPath: string
+  nextPath: string
 }

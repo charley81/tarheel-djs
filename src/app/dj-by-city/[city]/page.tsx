@@ -6,8 +6,12 @@ import Loading from './loading'
 import { capitalize } from '@/lib/helpers'
 import { Metadata } from 'next'
 
-export function generateMetadata({ params }: DjByCityProps): Metadata {
+export function generateMetadata({
+  params,
+  searchParams
+}: DjByCityProps): Metadata {
   const city = params.city
+  const page = searchParams.page ?? 1
   return {
     title: city === 'all' ? "All DJ's" : `DJ's in ${city}`,
     description: `Find the best DJ's ${
@@ -16,8 +20,12 @@ export function generateMetadata({ params }: DjByCityProps): Metadata {
   }
 }
 
-export default async function DjByCity({ params }: DjByCityProps) {
+export default async function DjByCity({
+  params,
+  searchParams
+}: DjByCityProps) {
   const city = params.city
+  const page = parseInt(searchParams.page as string) || 1
 
   return (
     <main className="flex flex-col items-center pt-36 p-4 min-h-[110vh]">
@@ -26,8 +34,8 @@ export default async function DjByCity({ params }: DjByCityProps) {
         {city !== 'all' && `DJ's in ${capitalize(city)}`}
       </TitleComponent>
 
-      <Suspense fallback={<Loading />}>
-        <DjList city={city} />
+      <Suspense key={city + page} fallback={<Loading />}>
+        <DjList city={city} page={page} />
       </Suspense>
     </main>
   )

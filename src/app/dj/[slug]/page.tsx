@@ -12,8 +12,7 @@ export async function generateMetadata({
   const dj = await getDj(slug)
 
   return {
-    title: dj.name,
-    description: dj.description
+    title: dj?.name
   }
 }
 
@@ -21,14 +20,15 @@ export default async function Dj({ params }: DjPageProps) {
   const { slug } = params
 
   const dj = await getDj(slug)
+  console.log(dj)
 
   return (
     <main className="">
       <section className="relative overflow-hidden flex items-center justify-center py-14 md:py-20">
         <Image
-          src={dj.imageUrl}
+          src={dj?.imageUrl}
           className="object-cover blur-3xl z-0"
-          alt={dj.name}
+          alt={dj?.name}
           fill
           quality={1}
           sizes="(max-width: 1280px) 100vw, 1280px"
@@ -68,8 +68,8 @@ export default async function Dj({ params }: DjPageProps) {
       <div className="p-4">
         <Section>
           <SectionHeader>About {dj.name}</SectionHeader>
-          <SectionSubheading>{dj.location}</SectionSubheading>
-          <SectionContent>{dj.description}</SectionContent>
+          <SectionSubheading>{dj.city}</SectionSubheading>
+          <SectionContent>{dj.bio}</SectionContent>
         </Section>
       </div>
     </main>

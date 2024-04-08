@@ -1,6 +1,7 @@
 import clsx, { ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Dj } from '@prisma/client'
+import prisma from './db'
+import { notFound } from 'next/navigation'
 
 export function cn(...classes: ClassValue[]) {
   return twMerge(clsx(classes))
@@ -14,23 +15,41 @@ export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export async function getDjs(city: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`,
-    {
-      next: {
-        revalidate: 300
+export async function getDjs(city: string, page = 1) {
+  const data = await prisma.dj.findMany({
+    where: {
+      city: city === 'all' ? undefined : capitalize(city)
+    },
+    take: 6,
+    skip: (page - 1) * 6
+  })
+
+  let totalCount
+  if (city === 'all') {
+    totalCount = await prisma.dj.count()
+  } else {
+    totalCount = await prisma.dj.count({
+      where: {
+        city: capitalize(city)
       }
-    }
-  )
-  const data: Dj[] = await res.json()
-  return data
+    })
+  }
+
+  return {
+    data,
+    totalCount
+  }
 }
 
 export async function getDj(slug: string) {
-  const res = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-  )
-  const data: Dj[] = await res.json()
-  return data
+  const dj = await prisma.dj.findUnique({
+    where: {
+      slug
+    }
+  })
+
+  if (!dj) {
+    return notFound()
+  }
+  return dj
 }
