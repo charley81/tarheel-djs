@@ -15,13 +15,30 @@ export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export async function getDjs(city: string) {
+export async function getDjs(city: string, page = 1) {
   const data = await prisma.dj.findMany({
     where: {
       city: city === 'all' ? undefined : capitalize(city)
-    }
+    },
+    take: 6,
+    skip: (page - 1) * 6
   })
-  return data
+
+  let totalCount
+  if (city === 'all') {
+    totalCount = await prisma.dj.count()
+  } else {
+    totalCount = await prisma.dj.count({
+      where: {
+        city: capitalize(city)
+      }
+    })
+  }
+
+  return {
+    data,
+    totalCount
+  }
 }
 
 export async function getDj(slug: string) {
