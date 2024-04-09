@@ -5,13 +5,14 @@ import DjList from '@/components/dj-list'
 import Loading from './loading'
 import { capitalize } from '@/lib/helpers'
 import { Metadata } from 'next'
+import z from 'zod'
 
 export function generateMetadata({
   params,
   searchParams
 }: DjByCityProps): Metadata {
   const city = params.city
-  const page = searchParams.page ?? 1
+
   return {
     title: city === 'all' ? "All DJ's" : `DJ's in ${city}`,
     description: `Find the best DJ's ${
@@ -20,12 +21,17 @@ export function generateMetadata({
   }
 }
 
+const pageNumberSchema = z.coerce.number().int().positive().optional()
+
 export default async function DjByCity({
   params,
   searchParams
 }: DjByCityProps) {
   const city = params.city
-  const page = parseInt(searchParams.page as string) || 1
+  const parsedPage = pageNumberSchema.safeParse(searchParams.page)
+  if (!parsedPage.success) {
+    throw new Error('Invalid page number')
+  }
 
   return (
     <main className="flex flex-col items-center pt-36 p-4 min-h-[110vh]">
@@ -34,8 +40,8 @@ export default async function DjByCity({
         {city !== 'all' && `DJ's in ${capitalize(city)}`}
       </TitleComponent>
 
-      <Suspense key={city + page} fallback={<Loading />}>
-        <DjList city={city} page={page} />
+      <Suspense key={city + parsedPage.data} fallback={<Loading />}>
+        <DjList city={city} page={parsedPage.data} />
       </Suspense>
     </main>
   )

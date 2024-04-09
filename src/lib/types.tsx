@@ -20,7 +20,7 @@ export type TitleComponentProps = ChildrenProps & {
 
 export type DjListProps = {
   city: string
-  page: number
+  page?: number
 }
 
 export type DjCardProps = {

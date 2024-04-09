@@ -3,7 +3,7 @@ import DjCard from './dj-card'
 import { getDjs } from '@/lib/helpers'
 import PaginationControls from './pagination-controls'
 
-export default async function DjList({ city, page }: DjListProps) {
+export default async function DjList({ city, page = 1 }: DjListProps) {
   const { data, totalCount } = await getDjs(city, page)
 
   const previousPath = page > 1 ? `/dj-by-city/${city}?page=${page - 1}` : ''
